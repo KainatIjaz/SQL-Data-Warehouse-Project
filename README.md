@@ -14,7 +14,7 @@ The data architecture follows the **Medallion Architecture** with three core lay
 
 ### 🔹 Bronze Layer
 - Stores raw data as-is from source systems.
-- Ingests data from CSV files into SQL Server.
+- Ingests data from CSV files into PostgreSQL Server.
 
 ### 🔸 Silver Layer
 - Performs data cleansing, standardization, and normalization.
@@ -31,7 +31,7 @@ The data architecture follows the **Medallion Architecture** with three core lay
 This project involves:
 
 - **Data Architecture**: Building a modern data warehouse using Bronze, Silver, and Gold layers.
-- **ETL Pipelines**: Extracting, transforming, and loading data from CSV (ERP & CRM) into SQL Server.
+- **ETL Pipelines**: Extracting, transforming, and loading data from CSV (ERP & CRM) into postgreSQL.
 - **Data Modeling**: Developing fact and dimension tables optimized for analytical queries.
 - **Analytics & Reporting**: Writing SQL reports and dashboards to derive business insights.
 
@@ -55,8 +55,6 @@ This repository is an excellent resource for:
 Everything is free to use! Key tools include:
 
 - **Datasets**: ERP and CRM CSV files
-- **SQL Server Express**: Lightweight development server
-- **SQL Server Management Studio (SSMS)**: GUI for SQL development
 - **Git & GitHub**: Version control and collaboration
 - **Draw.io**: Design diagrams and architecture
 - **Notion**: Get the full project plan and templates
@@ -87,14 +85,4 @@ Develop SQL-based insights into:
 - Customer Behavior
 - Product Performance
 - Sales Trends
-
-These help stakeholders make **data-driven decisions**.
-
-More details can be found in `docs/requirements.md`.
-
----
-
-## 📂 Repository Structure
-
-![image](https://github.com/user-attachments/assets/fb3f00ea-280f-406a-bcb6-0f1e1d03cd7f)
 
