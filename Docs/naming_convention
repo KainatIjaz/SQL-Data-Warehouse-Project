@@ -1,65 +1,80 @@
+# Data Warehouse Naming Conventions and General Principles
+
 ## General Principles
-- **Naming Conventions:** Use `snake_case`, with lowercase letters and underscores (`_`) to separate words.
-- **Language:** Use English for all names.
-- **Avoid Reserved Words:** Do not use SQL reserved words as object names.
+
+- **Naming Style**: Use `snake_case` with lowercase letters and underscores (`_`) to separate words.
+- **Language**: Use **English** for all object and column names.
+- **Avoid Reserved Words**: Never use SQL reserved keywords (e.g., `select`, `order`, `from`) as object or column names.
 
 ---
 
 ## Table Naming Conventions
 
 ### Bronze Layer
-- **Rules:**
-  - All names must start with the source system name.
-  - Table names must match their original names without renaming.
-- **Format:** `<sourcesystem>_<entity>`
-  - `<sourcesystem>`: Name of the source system (e.g., `crm`, `erp`).
-  - `<entity>`: Exact table name from the source system.
-- **Example:** `crm_customer_info` → Customer information from the CRM system.
+
+- **Format**: `<source_system>_<entity>`
+- **Rules**:
+  - Must start with the source system name (e.g., `crm`, `erp`).
+  - Table names must match their original source names — no renaming.
+- **Example**:
+  - `crm_customer_info` → Raw customer data from CRM system.
+  - `erp_sales_detail` → Raw sales data from ERP system.
 
 ### Silver Layer
-- **Rules:**
-  - All names must start with the source system name.
-  - Table names must match their original names without renaming.
-- **Format:** `<sourcesystem>_<entity>`
-  - `<sourcesystem>`: Name of the source system (e.g., `crm`, `erp`).
-  - `<entity>`: Exact table name from the source system.
-- **Example:** `crm_customer_info` → Customer information from the CRM system.
+
+- **Format**: `<source_system>_<entity>`
+- **Rules**:
+  - Also starts with the source system name (e.g., `crm`, `erp`).
+  - Table names remain identical to the original source.
+  - Used for cleaned and transformed data.
+- **Example**:
+  - `crm_customer_info` → Cleaned customer information.
+  - `erp_product_data` → Cleaned product data from ERP.
 
 ### Gold Layer
-- **Rules:**
-  - All names must use meaningful, business-aligned names for tables.
-  - Must start with a category prefix.
-- **Format:** `<category>_<entity>`
-  - `<category>`: Describes the role of the table, such as `dim` or `fact`.
-  - `<entity>`: Descriptive name of the table, aligned with the business domain.
-- **Examples:**
+
+- **Format**: `<category>_<entity>`
+- **Rules**:
+  - Table names must be **meaningful** and **business-aligned**.
+  - Use standard prefixes to indicate table type:
+    - `dim_` for dimension tables
+    - `fact_` for fact tables
+    - `report_` for reporting tables
+- **Examples**:
   - `dim_customers` → Dimension table for customer data.
-  - `fact_sales` → Fact table containing sales transactions.
+  - `fact_sales` → Fact table for sales transactions.
+  - `report_sales_monthly` → Report table summarizing monthly sales.
 
 ---
 
-## Glossary of Category Patterns
+## Glossary of Category Prefixes
 
-| Pattern    | Meaning         | Example(s)                          |
-|------------|------------------|-------------------------------------|
-| `dim_`     | Dimension table  | `dim_customer`, `dim_product`       |
-| `fact_`    | Fact table       | `fact_sales`                        |
-| `report_`  | Report table     | `report_customers`, `report_sales_monthly` |
+| Prefix     | Meaning            | Example(s)                  |
+|------------|--------------------|-----------------------------|
+| `dim_`     | Dimension table     | `dim_customer`, `dim_product` |
+| `fact_`    | Fact table          | `fact_sales`               |
+| `report_`  | Report table        | `report_sales_monthly`     |
 
 ---
 
 ## Column Naming Conventions
 
 ### Surrogate Keys
-- **Format:** `<table_name>_key`
-  - `<table_name>`: Refers to the name of the table or entity the key belongs to.
-  - `_key`: A suffix indicating that this column is a surrogate key.
-- **Example:** `customer_key` → Surrogate key in the `dim_customers` table.
+
+- **Format**: `<entity>_key`
+- **Usage**:
+  - Used as primary keys in dimension tables.
+- **Example**:
+  - `customer_key` → Surrogate key in `dim_customers`.
+  - `product_key` → Surrogate key in `dim_products`.
 
 ### Technical Columns
-- **Format:** `dwh_<column_name>`
-  - `dwh`: Prefix exclusively for system-generated metadata.
-  - `<column_name>`: Descriptive name indicating the column's purpose.
-- **Example:** `dwh_load_date` → System-generated column used to store the date when the record was loaded.
+
+- **Format**: `dwh_<column_name>`
+- **Usage**:
+  - Used for system-generated metadata.
+- **Examples**:
+  - `dwh_load_date` → Date when the record was loaded into the warehouse.
+  - `dwh_update_user` → User/system that updated the record.
 
 ---
