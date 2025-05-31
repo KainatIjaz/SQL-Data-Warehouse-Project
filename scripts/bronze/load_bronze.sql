@@ -1,12 +1,9 @@
 
 /*
-===============================================================================
 Load Bronze Layer (Source -> Bronze)
-===============================================================================
 Script Purpose:
     This loads data into the 'bronze' schema from external CSV files. 
    
-===============================================================================
 */
 TRUNCATE TABLE bronze.crm_cust_info;
 COPY bronze.crm_cust_info
