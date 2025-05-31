@@ -1,11 +1,8 @@
 
 /*
-===============================================================================
 	Actions Performed:
 		- Truncates Silver tables.
 		- Inserts transformed and cleansed data from Bronze into Silver tables.
-		
-===============================================================================
 */
 -- Step 1: Truncate the target table
 TRUNCATE TABLE silver.crm_cust_info;
